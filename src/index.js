@@ -32,14 +32,16 @@ class Sorter {
           toSort.push(this.arr[indices[i]]);
         }
 
-        if (this.compareFunction == AGE_COMPARATOR) {
+        if (this.compareFunction.toString() == AGE_COMPARATOR.toString()) {
           toSort.sort(function(a, b) {
           return a.age - b.age;
           });
-        } else if (this.compareFunction == REVERSE_COMPARATOR) {
+        } else if (this.compareFunction.toString() == REVERSE_COMPARATOR.toString()) {
           toSort.sort(function(a, b) {
           return b - a;
-          });
+          }); 
+        } else if (this.compareFunction.toString() == STRINGIFY_COMPARATOR.toString()) {
+          toSort.sort()
         } 
         else {
           toSort.sort(function(a, b) {
@@ -55,9 +57,6 @@ class Sorter {
       }
 
       setComparator(compareFunction) {
-        if (compareFunction == AGE_COMPARATOR) {
-          console.log('test')
-        }
         return this.compareFunction = compareFunction;
       }
 }
