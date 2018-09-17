@@ -1,12 +1,10 @@
-const AGE_COMPARATOR = (left, right) => left.age - right.age;
-const REVERSE_COMPARATOR = (left, right) => right - left;
-const STRINGIFY_COMPARATOR = (left, right) => JSON.stringify(left, null, 2).length - JSON.stringify(right, null, 2).length;
 
 class Sorter {
- constructor() {
+      constructor() {
         this.arr = [];
-        this.compareFunction = {};
-        this.ageComporator = (left, right) => left.age - right.age;
+        this.compareFunction = function(a, b) {
+            return a - b;
+          }    
       }
 
       add(element) {
@@ -26,29 +24,16 @@ class Sorter {
       }
 
       sort(indices) {
-        indices.sort();
+
         var toSort = []; 
         for (var i = 0; indices.length - 1 >= i; i++) {
           toSort.push(this.arr[indices[i]]);
         }
 
-        if (this.compareFunction.toString() == AGE_COMPARATOR.toString()) {
-          toSort.sort(function(a, b) {
-          return a.age - b.age;
-          });
-        } else if (this.compareFunction.toString() == REVERSE_COMPARATOR.toString()) {
-          toSort.sort(function(a, b) {
-          return b - a;
-          }); 
-        } else if (this.compareFunction.toString() == STRINGIFY_COMPARATOR.toString()) {
-          toSort.sort()
-        } 
-        else {
-          toSort.sort(function(a, b) {
-            return a - b;
-          });
-        }
+        toSort.sort(this.compareFunction);
         
+        indices = indices.sort();
+
         for (var i = 0; indices.length - 1 >= i; i++) {
           this.arr[indices[i]] = toSort[i];
         }
